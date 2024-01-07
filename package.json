@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0 --fix",
+    "lint:watch": "npx nodemon -x npm run lint:fix --ext js,jsx,json",
     "preview": "vite preview"
   },
   "dependencies": {
