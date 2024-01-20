@@ -1,5 +1,5 @@
 import {Clock, Entity, EntityDescription, Globe, PathGraphics, PointGraphics, Viewer} from 'resium';
-import {Color, Camera, Cartesian3, ClockRange, Ion, JulianDate, Rectangle, SampledPositionProperty} from 'cesium';
+import {Camera, Cartesian3, ClockRange, Color, Ion, JulianDate, Rectangle, SampledPositionProperty} from 'cesium';
 import {eciToGeodetic, gstime, propagate, twoline2satrec} from 'satellite.js';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
@@ -59,11 +59,12 @@ function App() {
 			<Globe enableLighting={true}/>
 			<Clock shouldAnimate={true} startTime={start.clone()} stopTime={stop.clone()} currentTime={start.clone()} multiplier={40} clockRange={ClockRange.LOOP_STOP}/>
 			<Entity position={positionsOverTime} tracked selected={isSelected} name={'24C4'}>
-				<PathGraphics show material={Color.RED} width={2} leadTime={1000} trailTime={1000}/>
+				<PathGraphics show material={Color.WHITE} width={1} leadTime={5500} trailTime={100}/>
 				<PointGraphics pixelSize={10}/>
 				<EntityDescription>
 					<h1>24C4</h1>
-					<p>In space no one can hear you clucking</p>
+					<p>In space no one can hear you cluck</p>
+					<img alt="Artwork" src="/satellite_1f6f0-fe0f.png" width="437"/>
 				</EntityDescription>
 			</Entity>
 		</Viewer>
