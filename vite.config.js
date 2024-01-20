@@ -9,7 +9,7 @@ import {configDefaults} from 'vitest/config';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig(() => ({
-	base: '/',
+	base: '/satellite-tracker',
 	build: {
 		outDir: 'build',
 	},
