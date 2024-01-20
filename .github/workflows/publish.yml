@@ -29,6 +29,8 @@ jobs:
         run: npm ci
       - name: Run build
         run: npm run build
+        env:
+          VITE_CESIUM_TOKEN: ${{ secrets.VITE_CESIUM_TOKEN }}
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
