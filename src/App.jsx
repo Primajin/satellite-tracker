@@ -55,16 +55,16 @@ function App() {
 	}
 
 	return data && (
-		<Viewer full shadows>
+		<Viewer full shadows creditContainer={'credit'}>
 			<Globe enableLighting={true}/>
-			<Clock shouldAnimate={true} startTime={start.clone()} stopTime={stop.clone()} currentTime={start.clone()} multiplier={40} clockRange={ClockRange.LOOP_STOP}/>
+			<Clock shouldAnimate={true} startTime={start.clone()} stopTime={stop.clone()} currentTime={start.clone()} multiplier={1} clockRange={ClockRange.LOOP_STOP}/>
 			<Entity position={positionsOverTime} tracked selected={isSelected} name={'24C4'}>
 				<PathGraphics show material={Color.WHITE} width={1} leadTime={5500} trailTime={100}/>
 				<PointGraphics pixelSize={10}/>
 				<EntityDescription>
-					<h1>24C4</h1>
+					<h1>Julia Hell</h1>
 					<p>In space no one can hear you cluck</p>
-					<img alt="Artwork" src="/satellite_1f6f0-fe0f.png" width="437" style={{maxWidth: '100%', height: 'auto'}}/>
+					<img alt="Artwork" src="/love-peace.svg" width="437" style={{height: 'auto', maxWidth: '100%'}}/>
 				</EntityDescription>
 			</Entity>
 		</Viewer>

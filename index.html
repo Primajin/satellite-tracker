@@ -9,7 +9,9 @@
         html, body {
             background: #000;
             height: 100%;
+            margin: 0;
             overflow: hidden;
+            padding: 0;
             position: relative;
             width: 100%;
         }
@@ -39,12 +41,29 @@
             top: 50%;
             transform: translate(-50%, -50%);
         }
+
+        .cesium-infoBox.cesium-infoBox {
+            height: calc(100% - 100px);
+            max-width: 150px;
+        }
+
+        .cesium-infoBox iframe {
+            height: 100% !important;
+            max-height: 100% !important;
+        }
+
+        @media screen and (pointer: fine) {
+            .cesium-infoBox.cesium-infoBox {
+                right: 6px;
+            }
+        }
     </style>
 </head>
 <body>
 <div class="center">
     <img class="rotating" src="/satellite_1f6f0-fe0f.png" width="512" height="512"/>
 </div>
+<div id="credit"></div>
 <div id="root"></div>
 <script type="module" src="/src/main.jsx"></script>
 </body>
