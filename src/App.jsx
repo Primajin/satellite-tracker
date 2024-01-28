@@ -64,7 +64,7 @@ function App() {
 				<EntityDescription>
 					<h1>24C4</h1>
 					<p>In space no one can hear you cluck</p>
-					<img alt="Artwork" src="/satellite_1f6f0-fe0f.png" width="437"/>
+					<img alt="Artwork" src="/satellite_1f6f0-fe0f.png" width="437" style={{maxWidth: '100%', height: 'auto'}}/>
 				</EntityDescription>
 			</Entity>
 		</Viewer>
