@@ -1,7 +1,7 @@
 /**
  * @license
  * Cesium - https://github.com/CesiumGS/cesium
- * Version 1.117
+ * Version 1.118.1
  *
  * Copyright 2011-2022 Cesium Contributors
  *
@@ -23,4 +23,4 @@
  * See https://github.com/CesiumGS/cesium/blob/main/LICENSE.md for full licensing details.
  */
 
-import{a}from"./chunk-BHWELPB4.js";import"./chunk-4ACNSQDC.js";export{a as default};
+import{a}from"./chunk-4FSMRIBR.js";import"./chunk-U73D6PDD.js";export{a as default};
