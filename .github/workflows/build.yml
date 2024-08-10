@@ -36,6 +36,7 @@ jobs:
         run: npx vite build --base="/pr-preview/pr-$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')/"
         env:
           VITE_CESIUM_TOKEN: ${{ secrets.VITE_CESIUM_TOKEN }}
+          CESIUM_BASE_URL: "/pr-preview/pr-$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')/"
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1
         with:
