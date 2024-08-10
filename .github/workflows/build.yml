@@ -35,7 +35,7 @@ jobs:
       - name: Set env
         run: echo "CESIUM_BASE_URL="pr-preview/pr-$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')/"" >> $GITHUB_ENV
       - name: Run build with Base
-        run: npx vite build --base=/${{ env.CESIUM_BASE_URL }}
+        run: npx vite build --base=${{ env.CESIUM_BASE_URL }}
         env:
           VITE_CESIUM_TOKEN: ${{ secrets.VITE_CESIUM_TOKEN }}
       - name: Deploy preview
