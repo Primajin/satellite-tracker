@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "axios": "^1.7.7",
-    "cesium": "^1.121.1",
+    "cesium": "^1.122.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "resium": "^1.18.2",
@@ -29,7 +29,7 @@
     "@vitejs/plugin-react-swc": "^3.7.1",
     "@vitest/coverage-v8": "^2.1.1",
     "eslint": "^8.57.1",
-    "eslint-plugin-react": "^7.37.0",
+    "eslint-plugin-react": "^7.37.1",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.12",
     "jsdom": "^25.0.1",
