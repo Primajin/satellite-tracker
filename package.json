@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "axios": "^1.7.7",
-    "cesium": "^1.123.0",
+    "cesium": "^1.123.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "resium": "^1.18.3",
