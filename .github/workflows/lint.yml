@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '21'
+          node-version: '22'
           cache: 'npm'
       - name: Cache dependencies
         uses: actions/cache@v4
@@ -43,6 +43,7 @@ jobs:
         uses: wearerequired/lint-action@v2
         with:
           auto_fix: true
-          eslint: true
+#          eslint: true # does not support eslint 9 yet
+          eslint_args: "--report-unused-disable-directives --max-warnings 0"
           commit_message: ":sparkles: Fix code style issues with ${linter}"
           git_email: Primajin@users.noreply.github.com
