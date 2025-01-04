@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "axios": "^1.7.9",
-    "cesium": "^1.124.0",
+    "cesium": "^1.125.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "resium": "^1.18.3",
@@ -29,11 +29,11 @@
     "@vitejs/plugin-react-swc": "^3.7.2",
     "@vitest/coverage-v8": "^2.1.8",
     "eslint": "^8.57.1",
-    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react": "^7.37.3",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "jsdom": "^25.0.1",
-    "vite": "^6.0.3",
+    "vite": "^6.0.7",
     "vite-plugin-cesium": "^1.2.23",
     "vitest": "^2.1.8"
   }
