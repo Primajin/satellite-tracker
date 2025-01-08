@@ -32,5 +32,6 @@ jobs:
         uses: Primajin/webapp-console-log-action@v1
         with:
           webapp-url: https://Primajin.github.io/satellite-tracker/pr-preview/pr-${{ github.event.number }}/
+          max-log-level: warning #temp change to ignore pattern once implemented to only filter out OpenGL / WebGL warnings
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
