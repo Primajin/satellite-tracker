@@ -29,9 +29,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Use WebApp Console Log Action
-        uses: Primajin/webapp-console-log-action@v1
+        uses: Primajin/webapp-console-log-action@7a95eb3b47815095e72d8977fedf7cfd6867e967
         with:
           webapp-url: https://Primajin.github.io/satellite-tracker/pr-preview/pr-${{ github.event.number }}/
-          max-log-level: warning #temp change to ignore pattern once implemented to only filter out OpenGL / WebGL warnings
+          regexp-warning: '\[GroupMarkerNotSet\(crbug\.com\/242999.+|\[\.WebGL-0x20bc000ce300\].+'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
