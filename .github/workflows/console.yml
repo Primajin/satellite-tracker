@@ -22,10 +22,10 @@ jobs:
         if: steps.wait-for-build.outputs.conclusion == 'failure'
         run: exit 1
         shell: bash
-      - name: Sleep for 120 seconds
-        if: steps.wait-for-build.outputs.conclusion == 'success'
-        run: sleep 120s
-        shell: bash
+#      - name: Sleep for 120 seconds
+#        if: steps.wait-for-build.outputs.conclusion == 'success'
+#        run: sleep 120s
+#        shell: bash
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Use WebApp Console Log Action
