@@ -11,25 +11,25 @@ jobs:
     runs-on: ubuntu-latest
     name: Get console logs
     steps:
-#      - name: Wait for build to succeed
-#        uses: fountainhead/action-wait-for-check@v1.2.0
-#        id: wait-for-build
-#        with:
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#          checkName: Make sure it builds. Then show a preview.
-#          ref: ${{ github.event.pull_request.head.sha || github.sha }}
-#      - name: Exit if build did not succeed
-#        if: steps.wait-for-build.outputs.conclusion == 'failure'
-#        run: exit 1
-#        shell: bash
-#      - name: Sleep for 120 seconds
-#        if: steps.wait-for-build.outputs.conclusion == 'success'
-#        run: sleep 120s
-#        shell: bash
+      - name: Wait for build to succeed
+        uses: fountainhead/action-wait-for-check@v1.2.0
+        id: wait-for-build
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: Make sure it builds. Then show a preview.
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: Exit if build did not succeed
+        if: steps.wait-for-build.outputs.conclusion == 'failure'
+        run: exit 1
+        shell: bash
+      - name: Sleep for 120 seconds
+        if: steps.wait-for-build.outputs.conclusion == 'success'
+        run: sleep 120s
+        shell: bash
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Use WebApp Console Log Action
-        uses: Primajin/webapp-console-log-action@16ff277b6dce07b012dc9dfa8f7ea82c694c7750
+        uses: Primajin/webapp-console-log-action@v1
         with:
           webapp-url: https://Primajin.github.io/satellite-tracker/pr-preview/pr-${{ github.event.number }}/
           regexp-warning: '\[.+(?:Automatic fallback to software WebGL has been deprecated|GPU stall due to ReadPixels).*'
