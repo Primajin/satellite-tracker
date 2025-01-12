@@ -32,6 +32,6 @@ jobs:
         uses: Primajin/webapp-console-log-action@58b144f0c7d971e391ade851af6a93a4db282df8
         with:
           webapp-url: https://Primajin.github.io/satellite-tracker/pr-preview/pr-${{ github.event.number }}/
-          regexp-warning: 'XFsoPzpbXlxdXSoyNDI5OTlbXlxdXSp8W15cXV0qMjBiYzAwMGNlMzAwW15cXV0qKVxdLis='
+          regexp-warning: 'XFsoPzpbXlxdXSoyNDI5OTlbXlxdXSp8W15cXV0qMjBiYzAwMGNlMzAwW15cXV0qKV0uKw'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
