@@ -29,9 +29,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Use WebApp Console Log Action
-        uses: Primajin/webapp-console-log-action@78ee540c9602f96ca854f4e8fa0a99bd5a91ef7f
+        uses: Primajin/webapp-console-log-action@16ff277b6dce07b012dc9dfa8f7ea82c694c7750
         with:
           webapp-url: https://Primajin.github.io/satellite-tracker/pr-preview/pr-${{ github.event.number }}/
-          regexp-warning: 'XFsuKyg/OkF1dG9tYXRpYyBmYWxsYmFjayB0byBzb2Z0d2FyZSBXZWJHTCBoYXMgYmVlbiBkZXByZWNhdGVkfEdQVSBzdGFsbCBkdWUgdG8gUmVhZFBpeGVscykuKg=='
+          regexp-warning: '\[.+(?:Automatic fallback to software WebGL has been deprecated|GPU stall due to ReadPixels).*'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
