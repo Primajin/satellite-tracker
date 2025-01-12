@@ -32,6 +32,6 @@ jobs:
         uses: Primajin/webapp-console-log-action@25b818345861fd3b55b23f52c45095028db427f1
         with:
           webapp-url: https://Primajin.github.io/satellite-tracker/pr-preview/pr-${{ github.event.number }}/
-          regexp-warning: '\\\\[GroupMarkerNotSet\\\\(crbug\\\\.com\\\\/242999.+|\\\\[\\\\.WebGL\\\\D0x20bc000ce300.+'
+          regexp-warning: '\\[GroupMarkerNotSet\\(crbug\\.com\\/242999.+|\\[\\.WebGL\\D0x20bc000ce300.+'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
