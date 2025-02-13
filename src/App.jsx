@@ -33,7 +33,7 @@ function App() {
 	useEffect(() => {
 		setTimeout(() => {
 			setIsSelected(!!data);
-		}, 1);
+		}, 1000);
 	}, [data]);
 
 	if (data) {
@@ -58,7 +58,7 @@ function App() {
 		<Viewer full shadows creditContainer={'credit'}>
 			<Globe enableLighting={true}/>
 			<Clock shouldAnimate={true} startTime={start.clone()} stopTime={stop.clone()} currentTime={start.clone()} multiplier={1} clockRange={ClockRange.LOOP_STOP}/>
-			<Entity position={positionsOverTime} tracked selected={isSelected} name={'24C4'}>
+			<Entity position={positionsOverTime} tracked={isSelected} selected={isSelected} name={'24C4'}>
 				<PathGraphics show material={Color.WHITE} width={1} leadTime={5500} trailTime={100}/>
 				<PointGraphics pixelSize={10}/>
 				<EntityDescription>
