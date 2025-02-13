@@ -33,7 +33,7 @@ function App() {
 	useEffect(() => {
 		setTimeout(() => {
 			setIsSelected(!!data);
-		}, 1000);
+		}, 333);
 	}, [data]);
 
 	if (data) {
