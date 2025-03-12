@@ -14,7 +14,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "axios": "^1.8.2",
+    "axios": "^1.8.3",
     "cesium": "^1.127.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
