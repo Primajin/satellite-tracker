@@ -38,7 +38,7 @@ function App() {
 
 	if (data) {
 		const tLEs = parsePlanetTLEs(data);
-		const eggsInSpace = tLEs['FLOCK-4Y']['24C4'];
+		const eggsInSpace = tLEs['FLOCK-4Y']['24B3'];
 		const satrec = twoline2satrec(eggsInSpace.split('\n')[0].trim(), eggsInSpace.split('\n')[1].trim());
 
 		for (let i = 0; i < totalSeconds; i += timestepInSeconds) {
