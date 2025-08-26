@@ -55,7 +55,7 @@ function App() {
 	}
 
 	return data && (
-		<Viewer full shadows creditContainer={'credit'}>
+		<Viewer full shadows>
 			<Globe enableLighting={true}/>
 			<Clock shouldAnimate={true} startTime={start.clone()} stopTime={stop.clone()} currentTime={start.clone()} multiplier={1} clockRange={ClockRange.LOOP_STOP}/>
 			<Entity position={positionsOverTime} tracked={isSelected} selected={isSelected} name={'24C4'}>
