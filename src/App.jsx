@@ -1,7 +1,7 @@
 import {Clock, Entity, EntityDescription, Globe, PathGraphics, PointGraphics, Viewer} from 'resium';
 import {Camera, Cartesian3, ClockRange, Color, Ion, JulianDate, Rectangle, SampledPositionProperty} from 'cesium';
 import {eciToGeodetic, gstime, propagate, twoline2satrec} from 'satellite.js';
-import {useEffect, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import axios from 'axios';
 
 import parsePlanetTLEs from './parsePlanetTLEs.js';
@@ -19,11 +19,11 @@ const start = JulianDate.fromDate(new Date());
 const stop = JulianDate.addSeconds(start, totalSeconds, new JulianDate());
 
 const positionsOverTime = new SampledPositionProperty();
+const DEFAULT_SATELLITE_NAME = 'Unknown Satellite';
 
 function App() {
 	const [isSelected, setIsSelected] = useState(false);
 	const [data, setData] = useState(null);
-	const [satelliteId, setSatelliteId] = useState('');
 
 	useEffect(() => {
 		axios.get('https://ephemerides.planet-labs.com/planet_mc.tle').then((res) => {
@@ -37,6 +37,19 @@ function App() {
 		}, 333);
 	}, [data]);
 
+	const satelliteId = useMemo(() => {
+		if (!data) return '';
+		
+		const tLEs = parsePlanetTLEs(data);
+		const flockConstellation = tLEs['FLOCK-4Y'];
+		
+		if (!flockConstellation || Object.keys(flockConstellation).length === 0) {
+			return '';
+		}
+		
+		return Object.keys(flockConstellation)[0];
+	}, [data]);
+
 	if (data) {
 		const tLEs = parsePlanetTLEs(data);
 		const flockConstellation = tLEs['FLOCK-4Y'];
@@ -48,10 +61,6 @@ function App() {
 		const firstSatelliteId = Object.keys(flockConstellation)[0];
 		const eggsInSpace = flockConstellation[firstSatelliteId];
 		const satrec = twoline2satrec(eggsInSpace.split('\n')[0].trim(), eggsInSpace.split('\n')[1].trim());
-
-		if (!satelliteId) {
-			setSatelliteId(firstSatelliteId);
-		}
 
 		for (let i = 0; i < totalSeconds; i += timestepInSeconds) {
 			const time = JulianDate.addSeconds(start, i, new JulianDate());
@@ -70,7 +79,7 @@ function App() {
 		<Viewer full shadows>
 			<Globe enableLighting={true}/>
 			<Clock shouldAnimate={true} startTime={start.clone()} stopTime={stop.clone()} currentTime={start.clone()} multiplier={1} clockRange={ClockRange.LOOP_STOP}/>
-			<Entity position={positionsOverTime} tracked={isSelected} selected={isSelected} name={satelliteId || '24C4'}>
+			<Entity position={positionsOverTime} tracked={isSelected} selected={isSelected} name={satelliteId || DEFAULT_SATELLITE_NAME}>
 				<PathGraphics show material={Color.WHITE} width={1} leadTime={5500} trailTime={100}/>
 				<PointGraphics pixelSize={10}/>
 				<EntityDescription>
