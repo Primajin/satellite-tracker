@@ -23,6 +23,7 @@ const positionsOverTime = new SampledPositionProperty();
 function App() {
 	const [isSelected, setIsSelected] = useState(false);
 	const [data, setData] = useState(null);
+	const [satelliteId, setSatelliteId] = useState('');
 
 	useEffect(() => {
 		axios.get('https://ephemerides.planet-labs.com/planet_mc.tle').then((res) => {
@@ -39,9 +40,18 @@ function App() {
 	if (data) {
 		const tLEs = parsePlanetTLEs(data);
 		const flockConstellation = tLEs['FLOCK-4Y'];
+		
+		if (!flockConstellation || Object.keys(flockConstellation).length === 0) {
+			return null;
+		}
+		
 		const firstSatelliteId = Object.keys(flockConstellation)[0];
 		const eggsInSpace = flockConstellation[firstSatelliteId];
 		const satrec = twoline2satrec(eggsInSpace.split('\n')[0].trim(), eggsInSpace.split('\n')[1].trim());
+
+		if (!satelliteId) {
+			setSatelliteId(firstSatelliteId);
+		}
 
 		for (let i = 0; i < totalSeconds; i += timestepInSeconds) {
 			const time = JulianDate.addSeconds(start, i, new JulianDate());
@@ -60,7 +70,7 @@ function App() {
 		<Viewer full shadows>
 			<Globe enableLighting={true}/>
 			<Clock shouldAnimate={true} startTime={start.clone()} stopTime={stop.clone()} currentTime={start.clone()} multiplier={1} clockRange={ClockRange.LOOP_STOP}/>
-			<Entity position={positionsOverTime} tracked={isSelected} selected={isSelected} name={'24C4'}>
+			<Entity position={positionsOverTime} tracked={isSelected} selected={isSelected} name={satelliteId || '24C4'}>
 				<PathGraphics show material={Color.WHITE} width={1} leadTime={5500} trailTime={100}/>
 				<PointGraphics pixelSize={10}/>
 				<EntityDescription>
