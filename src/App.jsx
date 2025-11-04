@@ -50,16 +50,10 @@ function App() {
 		return Object.keys(flockConstellation)[0];
 	}, [data]);
 
-	if (data) {
+	if (data && satelliteId) {
 		const tLEs = parsePlanetTLEs(data);
 		const flockConstellation = tLEs['FLOCK-4Y'];
-		
-		if (!flockConstellation || Object.keys(flockConstellation).length === 0) {
-			return null;
-		}
-		
-		const firstSatelliteId = Object.keys(flockConstellation)[0];
-		const eggsInSpace = flockConstellation[firstSatelliteId];
+		const eggsInSpace = flockConstellation[satelliteId];
 		const satrec = twoline2satrec(eggsInSpace.split('\n')[0].trim(), eggsInSpace.split('\n')[1].trim());
 
 		for (let i = 0; i < totalSeconds; i += timestepInSeconds) {
