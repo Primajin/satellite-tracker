@@ -23,11 +23,17 @@ describe('App', () => {
 		vi.clearAllMocks();
 	});
 
-	it('renders without crashing', () => {
+	it('renders without crashing', async () => {
 		// Mock successful axios response with mock TLE data
 		axios.get.mockResolvedValue({data: mockTLEData});
 		
 		const rendering = render(<App/>);
+		
+		// Wait for async state updates to complete
+		await waitFor(() => {
+			expect(axios.get).toHaveBeenCalled();
+		}, {timeout: 3000});
+		
 		expect(rendering).toMatchSnapshot();
 	});
 
