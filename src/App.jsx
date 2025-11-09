@@ -37,56 +37,43 @@ function App() {
 		}, 333);
 	}, [data]);
 
-	const satelliteId = useMemo(() => {
-		if (!data) return '';
+	const satelliteData = useMemo(() => {
+		if (!data) return null;
 		
 		const tLEs = parsePlanetTLEs(data);
 		
 		// Try to get FLOCK-4Y constellation first
-		let flockConstellation = tLEs['FLOCK-4Y'];
+		let constellation = tLEs['FLOCK-4Y'];
 		
 		// If FLOCK-4Y doesn't exist or is empty, fall back to any other constellation
-		if (!flockConstellation || Object.keys(flockConstellation).length === 0) {
+		if (!constellation || Object.keys(constellation).length === 0) {
 			// Get all constellations
 			const allConstellations = Object.keys(tLEs);
 			
 			// Find the first constellation that has satellites
 			for (const constellationName of allConstellations) {
-				const constellation = tLEs[constellationName];
-				if (constellation && Object.keys(constellation).length > 0) {
-					flockConstellation = constellation;
+				const currentConstellation = tLEs[constellationName];
+				if (currentConstellation && Object.keys(currentConstellation).length > 0) {
+					constellation = currentConstellation;
 					break;
 				}
 			}
 			
-			// If still no constellation found, return empty string
-			if (!flockConstellation || Object.keys(flockConstellation).length === 0) {
-				return '';
+			// If still no constellation found, return null
+			if (!constellation || Object.keys(constellation).length === 0) {
+				return null;
 			}
 		}
 		
-		return Object.keys(flockConstellation)[0];
+		const satelliteId = Object.keys(constellation)[0];
+		const tle = constellation[satelliteId];
+		
+		return {satelliteId, tle};
 	}, [data]);
 
-	if (data && satelliteId) {
-		const tLEs = parsePlanetTLEs(data);
-		
-		// Try to get FLOCK-4Y constellation first, otherwise fall back to any constellation
-		let flockConstellation = tLEs['FLOCK-4Y'];
-		if (!flockConstellation || Object.keys(flockConstellation).length === 0) {
-			// Get all constellations and find the first one with satellites
-			const allConstellations = Object.keys(tLEs);
-			for (const constellationName of allConstellations) {
-				const constellation = tLEs[constellationName];
-				if (constellation && Object.keys(constellation).length > 0) {
-					flockConstellation = constellation;
-					break;
-				}
-			}
-		}
-		
-		const eggsInSpace = flockConstellation[satelliteId];
-		const satrec = twoline2satrec(eggsInSpace.split('\n')[0].trim(), eggsInSpace.split('\n')[1].trim());
+	if (satelliteData) {
+		const {tle} = satelliteData;
+		const satrec = twoline2satrec(tle.split('\n')[0].trim(), tle.split('\n')[1].trim());
 
 		for (let i = 0; i < totalSeconds; i += timestepInSeconds) {
 			const time = JulianDate.addSeconds(start, i, new JulianDate());
@@ -105,7 +92,7 @@ function App() {
 		<Viewer full shadows>
 			<Globe enableLighting={true}/>
 			<Clock shouldAnimate={true} startTime={start.clone()} stopTime={stop.clone()} currentTime={start.clone()} multiplier={1} clockRange={ClockRange.LOOP_STOP}/>
-			<Entity position={positionsOverTime} tracked={isSelected} selected={isSelected} name={satelliteId || DEFAULT_SATELLITE_NAME}>
+			<Entity position={positionsOverTime} tracked={isSelected} selected={isSelected} name={satelliteData?.satelliteId || DEFAULT_SATELLITE_NAME}>
 				<PathGraphics show material={Color.WHITE} width={1} leadTime={5500} trailTime={100}/>
 				<PointGraphics pixelSize={10}/>
 				<EntityDescription>
