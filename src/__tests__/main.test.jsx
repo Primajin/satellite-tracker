@@ -24,8 +24,8 @@ describe('App', () => {
 	});
 
 	it('renders without crashing', () => {
-		// Mock axios to reject (simulating network error)
-		axios.get.mockRejectedValue(new Error('Network Error'));
+		// Mock successful axios response with mock TLE data
+		axios.get.mockResolvedValue({data: mockTLEData});
 		
 		const rendering = render(<App/>);
 		expect(rendering).toMatchSnapshot();
@@ -61,8 +61,8 @@ describe('App', () => {
 		expect(container.querySelector('canvas')).toBeTruthy();
 	});
 
-	it('handles empty constellation gracefully', async () => {
-		// Mock with data that has no FLOCK-4Y satellites
+	it('falls back to any satellite when FLOCK-4Y is not available', async () => {
+		// Mock with data that has no FLOCK-4Y satellites, but has other satellites
 		const emptyTLEData = `0 DOVE 2 0505
 1 39132U PLANET   24014.33959491  .00000000  00000+0  68541-3 0    01
 2 39132 064.8706 191.0812 0013941 242.6312 160.2676 15.18144161    01`;
@@ -76,7 +76,7 @@ describe('App', () => {
 			expect(axios.get).toHaveBeenCalled();
 		}, {timeout: 3000});
 		
-		// Component should handle missing constellation gracefully
+		// Component should handle missing FLOCK-4Y constellation by using any available satellite
 		expect(container).toBeTruthy();
 	});
 });

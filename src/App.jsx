@@ -41,10 +41,28 @@ function App() {
 		if (!data) return '';
 		
 		const tLEs = parsePlanetTLEs(data);
-		const flockConstellation = tLEs['FLOCK-4Y'];
 		
+		// Try to get FLOCK-4Y constellation first
+		let flockConstellation = tLEs['FLOCK-4Y'];
+		
+		// If FLOCK-4Y doesn't exist or is empty, fall back to any other constellation
 		if (!flockConstellation || Object.keys(flockConstellation).length === 0) {
-			return '';
+			// Get all constellations
+			const allConstellations = Object.keys(tLEs);
+			
+			// Find the first constellation that has satellites
+			for (const constellationName of allConstellations) {
+				const constellation = tLEs[constellationName];
+				if (constellation && Object.keys(constellation).length > 0) {
+					flockConstellation = constellation;
+					break;
+				}
+			}
+			
+			// If still no constellation found, return empty string
+			if (!flockConstellation || Object.keys(flockConstellation).length === 0) {
+				return '';
+			}
 		}
 		
 		return Object.keys(flockConstellation)[0];
@@ -52,7 +70,21 @@ function App() {
 
 	if (data && satelliteId) {
 		const tLEs = parsePlanetTLEs(data);
-		const flockConstellation = tLEs['FLOCK-4Y'];
+		
+		// Try to get FLOCK-4Y constellation first, otherwise fall back to any constellation
+		let flockConstellation = tLEs['FLOCK-4Y'];
+		if (!flockConstellation || Object.keys(flockConstellation).length === 0) {
+			// Get all constellations and find the first one with satellites
+			const allConstellations = Object.keys(tLEs);
+			for (const constellationName of allConstellations) {
+				const constellation = tLEs[constellationName];
+				if (constellation && Object.keys(constellation).length > 0) {
+					flockConstellation = constellation;
+					break;
+				}
+			}
+		}
+		
 		const eggsInSpace = flockConstellation[satelliteId];
 		const satrec = twoline2satrec(eggsInSpace.split('\n')[0].trim(), eggsInSpace.split('\n')[1].trim());
 
