@@ -18,7 +18,7 @@
     "cesium": "^1.138.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "resium": "^1.19.3",
+    "resium": "^1.19.4",
     "satellite.js": "^6.0.2"
   },
   "devDependencies": {
