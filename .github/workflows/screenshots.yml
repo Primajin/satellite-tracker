@@ -39,7 +39,7 @@ jobs:
           devices: iPhone 13,iPad Pro,iPad Pro landscape
           fullpage: false
           noDesktop: true
-          releaseId: 739797683 # satellite-tracker repository ID
+          releaseId: 291600528 # v1.0.0 release ID
           type: png
           url: ${{ env.PR_NUMBER }}
         env:
