@@ -32,6 +32,8 @@ export default defineConfig(() => ({
 			all: true,
 		},
 		globals: true,
+		// Use jsdom to simulate a browser environment, preventing "ReferenceError: window is not defined"
+		// in tests that rely on browser globals (e.g. components using Cesium/DOM APIs).
 		environment: 'jsdom',
 		setupFiles: './setup-tests.js',
 	},
