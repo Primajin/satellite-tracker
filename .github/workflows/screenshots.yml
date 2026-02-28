@@ -44,7 +44,7 @@ jobs:
           url: ${{ env.PR_NUMBER }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: https://primajin.github.io/satellite-tracker/pr-preview/pr-${{ github.event.number }}/
+          PR_NUMBER: https://happy-birthday.julia-hell.com/pr-preview/pr-${{ github.event.number }}/
       - uses: actions/upload-artifact@v7
         with:
           path: screenshots
