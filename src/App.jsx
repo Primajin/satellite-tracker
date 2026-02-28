@@ -6,9 +6,13 @@ import axios from 'axios';
 
 import parsePlanetTLEs from './parsePlanetTLEs.js';
 
-Ion.defaultAccessToken = import.meta.env.VITE_CESIUM_TOKEN;
-// Berlin
-Camera.DEFAULT_VIEW_RECTANGLE = Rectangle.fromDegrees(8, 49, 18, 55);
+// Guard Cesium initialization against non-browser environments (e.g. SSR or test runs without jsdom),
+// to prevent "ReferenceError: window is not defined" when window/DOM APIs are unavailable.
+if (typeof window !== 'undefined') {
+	Ion.defaultAccessToken = import.meta.env.VITE_CESIUM_TOKEN;
+	// Berlin
+	Camera.DEFAULT_VIEW_RECTANGLE = Rectangle.fromDegrees(8, 49, 18, 55);
+}
 
 // Give SatelliteJS the TLEs and a specific time.
 // Get back a longitude, latitude, height (m).
