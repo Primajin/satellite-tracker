@@ -33,7 +33,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.26",
     "jsdom": "^29.0.0",
-    "vite": "^8.0.0",
+    "vite": "^8.0.1",
     "vite-plugin-cesium": "^1.2.23",
     "vitest": "^4.0.3"
   }
