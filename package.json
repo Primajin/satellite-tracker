@@ -19,7 +19,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "resium": "^1.20.0",
-    "satellite.js": "^6.0.2"
+    "satellite.js": "^7.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",
