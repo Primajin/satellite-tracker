@@ -14,11 +14,11 @@
     "test": "vitest"
   },
   "dependencies": {
-    "axios": "^1.15.0",
+    "axios": "^1.15.1",
     "cesium": "^1.140.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "resium": "^1.20.1",
+    "resium": "^1.21.0",
     "satellite.js": "^7.0.0"
   },
   "devDependencies": {
@@ -30,10 +30,10 @@
     "@vitest/coverage-v8": "^4.1.4",
     "eslint": "^8.57.1",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.1.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.4.26",
     "jsdom": "^29.0.2",
-    "vite": "^8.0.8",
+    "vite": "^8.0.9",
     "vite-plugin-cesium": "^1.2.23",
     "vitest": "^4.0.3"
   }
