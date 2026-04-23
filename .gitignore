@@ -27,3 +27,6 @@ coverage
 
 # dotenv environment variable files
 .env.*
+
+# test results
+junit.xml
