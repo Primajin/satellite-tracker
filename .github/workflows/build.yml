@@ -38,6 +38,7 @@ jobs:
         run: npx vite build --base=${{ env.CESIUM_BASE_URL }}
         env:
           VITE_CESIUM_TOKEN: ${{ secrets.VITE_CESIUM_TOKEN }}
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1
         with:

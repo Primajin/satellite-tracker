@@ -4,6 +4,7 @@ import {fileURLToPath} from 'node:url';
 import {defineConfig, searchForWorkspaceRoot} from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import cesium from 'vite-plugin-cesium';
+import {codecovVitePlugin} from '@codecov/vite-plugin';
 import {configDefaults} from 'vitest/config';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -16,7 +17,17 @@ export default defineConfig(() => ({
 	worker: {
 		format: 'es',
 	},
-	plugins: [react(), cesium()],
+	plugins: [
+		react(),
+		cesium(),
+		// Put the Codecov vite plugin after all other plugins
+		codecovVitePlugin({
+			enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
+			bundleName: 'satellite-tracker',
+			uploadToken: process.env.CODECOV_TOKEN,
+			gitService: 'github',
+		}),
+	],
 	resolve: {
 		preserveSymlinks: true,
 	},
@@ -39,5 +50,9 @@ export default defineConfig(() => ({
 		// in tests that rely on browser globals (e.g. components using Cesium/DOM APIs).
 		environment: 'jsdom',
 		setupFiles: './setup-tests.js',
+		reporters: ['default', 'junit'],
+		outputFile: {
+			junit: './junit.xml',
+		},
 	},
 }));
