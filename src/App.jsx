@@ -36,9 +36,11 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		setTimeout(() => {
+		const id = setTimeout(() => {
 			setIsSelected(!!data);
 		}, 333);
+
+		return () => clearTimeout(id);
 	}, [data]);
 
 	const satelliteData = useMemo(() => {
