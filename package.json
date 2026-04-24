@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@codecov/vite-plugin": "^2.0.1",
-    "@testing-library/dom": "^10.4.0",
+    "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@types/react": "^19.0.12",
@@ -35,7 +35,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.4.26",
     "jsdom": "^29.0.2",
-    "vite": "^8.0.9",
+    "vite": "^8.0.10",
     "vite-plugin-cesium": "^1.2.23",
     "vitest": "^4.0.3"
   },
