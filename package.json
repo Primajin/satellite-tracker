@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@codecov/vite-plugin": "^2.0.1",
+    "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@types/react": "^19.0.12",
@@ -37,5 +38,10 @@
     "vite": "^8.0.9",
     "vite-plugin-cesium": "^1.2.23",
     "vitest": "^4.0.3"
+  },
+  "overrides": {
+    "@codecov/vite-plugin": {
+      "vite": "$vite"
+    }
   }
 }
