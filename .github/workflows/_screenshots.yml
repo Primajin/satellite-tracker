@@ -1,0 +1,58 @@
+name: "CI · Screenshots"
+
+on:
+  workflow_call:
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    name: Take a screenshot after page was built
+    permissions: write-all
+    env:
+      PREVIEW_URL: https://happy-birthday.julia-hell.com/pr-preview/pr-${{ github.event.number }}/
+    steps:
+      - name: Wait for preview to be available
+        run: |
+          TIMEOUT=180
+          INTERVAL=5
+          ELAPSED=0
+          until [ $ELAPSED -ge $TIMEOUT ]; do
+            STATUS=$(curl --silent --output /dev/null --write-out "%{http_code}" "${PREVIEW_URL}" || true)
+            if [[ "$STATUS" =~ ^2 ]]; then
+              echo "Preview is available (HTTP $STATUS)"
+              exit 0
+            fi
+            echo "Waiting for preview... (HTTP $STATUS, ${ELAPSED}s elapsed)"
+            sleep $INTERVAL
+            ELAPSED=$((ELAPSED + INTERVAL))
+          done
+          echo "Timed out waiting for preview after ${TIMEOUT}s"
+          exit 1
+        shell: bash
+      - name: Checkout code
+        uses: actions/checkout@v7
+      - name: install puppeteer-headful
+        uses: mujo-code/puppeteer-headful@master
+        env:
+          CI: 'true'
+      - name: screenshots-ci-action
+        uses: Primajin/screenshots-ci-action@v3
+        with:
+          devices: iPhone 13,iPad Pro,iPad Pro landscape
+          fullPage: false
+          noDesktop: true
+          releaseId: 291600528 # v1.0.0 release ID
+          type: png
+          url: ${{ env.PREVIEW_URL }}
+          waitUntil: load
+          # Wait ~10s for Cesium globe to load imagery tiles after page load.
+          # Uses a non-existent selector so the timeout acts as a render delay;
+          # the action catches the timeout and proceeds to take screenshots.
+          waitForSelector: '#_render_delay'
+          waitForSelectorTimeout: 10000
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@v7
+        with:
+          path: screenshots
+          name: Download-screenshots
