@@ -53,7 +53,7 @@ jobs:
         uses: Primajin/screenshots-ci-action@v3
         with:
           devices: iPhone 13,iPad Pro,iPad Pro landscape
-          fullpage: false
+          fullPage: false
           noDesktop: true
           releaseId: 291600528 # v1.0.0 release ID
           type: png
