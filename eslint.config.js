@@ -1,4 +1,4 @@
-import js from '@eslint/js'
+import eslint from '@eslint/js'
 import globals from 'globals'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
@@ -6,35 +6,28 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 
 export default [
   {
-    ignores: ['build', 'dist', 'coverage'],
+    ignores: ['build', 'dist', 'coverage', '.eslintrc.cjs'],
   },
+  eslint.configs.recommended,
+  react.configs.flat.recommended,
+  react.configs.flat['jsx-runtime'],
+  reactHooks.configs.flat.recommended,
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
       ecmaVersion: 'latest',
-      globals: globals.browser,
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
       sourceType: 'module',
+      globals: globals.browser,
     },
     plugins: {
-      react,
-      'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
     },
     settings: {
       react: {
-        version: '18.2',
+        version: '19.3',
       },
     },
     rules: {
-      ...js.configs.recommended.rules,
-      ...react.configs.flat.recommended.rules,
-      ...react.configs.flat['jsx-runtime'].rules,
-      ...reactHooks.configs.flat.recommended.rules,
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
