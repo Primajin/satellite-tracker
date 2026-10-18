@@ -32,7 +32,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v7
       - name: Use WebApp Console Log Action
-        uses: Primajin/webapp-console-log-action@v1
+        uses: Primajin/webapp-console-log-action@v2
         with:
           webapp-url: ${{ env.PREVIEW_URL }}
           regexp-warning: '\[.+(?:Automatic fallback to software WebGL has been deprecated|GPU stall due to ReadPixels).*'
