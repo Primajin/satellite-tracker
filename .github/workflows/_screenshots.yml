@@ -31,25 +31,21 @@ jobs:
         shell: bash
       - name: Checkout code
         uses: actions/checkout@v7
-      - name: install puppeteer-headful
-        uses: mujo-code/puppeteer-headful@master
-        env:
-          CI: 'true'
       - name: screenshots-ci-action
-        uses: Primajin/screenshots-ci-action@v3
+        uses: Primajin/screenshots-ci-action@v4
         with:
-          devices: iPhone 13,iPad Pro,iPad Pro landscape
-          fullPage: false
-          noDesktop: true
-          releaseId: 291600528 # v1.0.0 release ID
+          devices: iPhone 13,iPad Pro 11,iPad Pro 11 landscape
+          full-page: false
+          no-desktop: true
+          release-id: 291600528 # v1.0.0 release ID
           type: png
           url: ${{ env.PREVIEW_URL }}
-          waitUntil: load
+          wait-until: load
           # Wait ~10s for Cesium globe to load imagery tiles after page load.
           # Uses a non-existent selector so the timeout acts as a render delay;
           # the action catches the timeout and proceeds to take screenshots.
-          waitForSelector: '#_render_delay'
-          waitForSelectorTimeout: 10000
+          wait-for-selector: '#_render_delay'
+          wait-for-selector-timeout: 10000
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/upload-artifact@v7
