@@ -13,7 +13,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Make sure it builds. Then show a preview.
-    permissions: write-all
+    permissions:
+      contents: write # pr-preview-action pushes/removes the preview on the gh-pages branch
+      pull-requests: write # pr-preview-action posts and updates the sticky preview comment
     steps:
       - name: Checkout code
         uses: actions/checkout@v7

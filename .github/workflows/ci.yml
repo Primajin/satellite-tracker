@@ -15,13 +15,17 @@ permissions: {}
 jobs:
   build:
     if: github.event_name == 'pull_request'
-    permissions: write-all
+    permissions:
+      contents: write # pr-preview-action pushes/removes the preview on the gh-pages branch
+      pull-requests: write # pr-preview-action posts and updates the sticky preview comment
     uses: ./.github/workflows/_build.yml
     secrets: inherit
 
   lint:
     if: github.event_name == 'push' || github.event.action != 'closed'
-    permissions: write-all
+    permissions:
+      contents: write # lint-action pushes auto-fix commits to the branch (also covers checkout)
+      checks: write # lint-action creates check runs and annotations
     uses: ./.github/workflows/_lint.yml
     secrets: inherit
 
