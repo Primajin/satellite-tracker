@@ -7,7 +7,9 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     name: Make sure the code adheres to the XO coding standard.
-    permissions: write-all
+    permissions:
+      contents: write # lint-action pushes auto-fix commits to the branch (also covers checkout)
+      checks: write # lint-action creates check runs and annotations
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
